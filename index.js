@@ -6,7 +6,7 @@ const { parseReportData } = require('./services/parser');
 const db = require('./models');
 const { createClient, createClients, getClients } = require('./controllers/Client');
 
-const port = 3000;
+const port = 8080;
 const app = express()
 
 const corsOptions = {
