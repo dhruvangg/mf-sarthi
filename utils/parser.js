@@ -36,14 +36,37 @@ exports.parseReportData = async () => {
                         }
                     }
                     return mappedRow;
-                });                
+                });
                 return mappedData;
             } else if (stats.isDirectory()) {
                 return `Directory: ${file} \n\n`;
             }
-        }));        
+        }));
         return fileStats //.flat();
     } catch (err) {
         console.error('Error reading directory:', err);
     }
 };
+
+exports.parseData = (body) => {
+    console.log();
+    fundData = []
+    bodyClean = body.replace(/\r?\n/g, "\n")
+    bodyArr = bodyClean.split("\n")
+    funds = bodyArr.map((str) => {
+        return str.split(";")
+    })
+
+    headers = funds[0]
+
+    for (let i = 1; i < funds.length; i++) {
+        if (funds[i].length === 6) {
+            let obj = {}
+            for (let j = 0; j < 6; j++)
+                obj[headers[j]] = funds[i][j]
+            fundData.push(obj)
+        }
+    }
+
+    return fundData
+}

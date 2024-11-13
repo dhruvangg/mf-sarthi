@@ -1,21 +1,23 @@
 services:
   database:
-    image: postgres:17
+    image: mysql:9.1.0
+    container_name: mysql
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
-    ports: 
-      - 5432:5432
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=fundmetrics
+      - MYSQL_USER=champdecay
+      - MYSQL_PASSWORD=champdecay
+    ports:
+      - 3307:3306
     volumes:
-      - postgres-data:/var/lib/postgressql/data 
+      - mysql_data:/var/lib/mysql 
   redis:
     image: redis:latest
     container_name: redis-cache
     ports:
       - "6379:6379"
     volumes:
-      - redis-data:/data       
+      - redis-data:/data
   server:
     build:
       context: .
@@ -24,16 +26,17 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    environment: 
-      - DB_HOST=database    
-      - DB_USER=postgres    
-      - DB_PASSWORD=postgres    
-      - DB_NAME=postgres   
+    environment:
+      - DB_HOST=database
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=postgres
       - REDIS_HOST=redis
-      - REDIS_PORT=6379 
+      - REDIS_PORT=6379
     depends_on:
       - database
       - redis
 volumes:
-  postgres-data:
+  mysql_data:
+    driver: local
   redis-data:
