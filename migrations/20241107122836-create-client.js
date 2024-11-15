@@ -42,17 +42,11 @@ module.exports = {
       },
       mobile: {
         type: Sequelize.STRING,
-        allowNull: true,
-        validate: {
-          is: /^(\d{3}[-.\s]?\d{3}[-.\s]?\d{4})$/i,
-        }
+        allowNull: true
       },
       alternate_mobile: {
         type: Sequelize.STRING,
-        allowNull: true,
-        validate: {
-          is: /^(\d{3}[-.\s]?\d{3}[-.\s]?\d{4})$/i,
-        }
+        allowNull: true
       },
       birthdate: {
         type: Sequelize.DATE,
@@ -66,19 +60,23 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: true
       },
-      address: {
+      address_1: {
         type: Sequelize.STRING,
         allowNull: true
       },
-      landmark: {
+      address_2: {
         type: Sequelize.STRING,
         allowNull: true
       },
-      area: {
+      address_3: {
         type: Sequelize.STRING,
         allowNull: true
       },
       city: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      pincode: {
         type: Sequelize.STRING,
         allowNull: true
       },
@@ -88,7 +86,7 @@ module.exports = {
       },
       country: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       createdAt: {
         allowNull: false,

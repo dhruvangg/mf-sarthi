@@ -11,13 +11,13 @@ services:
       - 3307:3306
     volumes:
       - mysql_data:/var/lib/mysql 
-  redis:
-    image: redis:latest
-    container_name: redis-cache
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis-data:/data
+  # redis:
+  #   image: redis:latest
+  #   container_name: redis-cache
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis-data:/data
   server:
     build:
       context: .
@@ -35,8 +35,8 @@ services:
       - REDIS_PORT=6379
     depends_on:
       - database
-      - redis
+      # - redis
 volumes:
   mysql_data:
     driver: local
-  redis-data:
+  # redis-data:
